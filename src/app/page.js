@@ -8,52 +8,60 @@ export default class Page extends React.Component {
         super(props);
         this.handleChange9 = this.handleChange9.bind(this);
         this.getTextUpgr = this.getTextUpgr.bind(this);
-        this.state = {
-            motivo: '',
-            fast: '',
-            horario: '',
-            contato1: '',
-            contato2: '',
-            mcontato: '',
+        this.state = {            
             ncliente: '',
             ccliente: '',
             volume: '',
+            vnota: '',
+            nnota: '',
+            epagador: '',
+            npagador: '',
+            cnpjp: '',
+            dpagador: '',
+            ndestino: '',
+            cnpjd: '',
+            dendereco: '',
+            remessa: '',
+            cubagem: '',
+            transportadora: '',
         };
     }
 
     getTextUpgr() {
-        return `Notas
+        return `
+${this.state.remessa}
+${this.state.ccliente} - ${this.state.ncliente}
+Volumes: ${this.state.volume} - ${this.state.cubagem}
+Objetos: 
+${this.state.objeto}
 
-Qual o nome do cliente?
-R: ${this.state.ncliente}
+Transportadora: ${this.state.transportadora}
 
-Qual o código do cliente?
-R: ${this.state.ccliente}
+VALOR NF: R$${this.state.vnota} NOTA= ${this.state.nnota}
 
-Quantidade de volume?
-R: ${this.state.volume}
+OBS LOCAL DE COLETA E PAGADOR: ${this.state.npagador} - ${this.state.cnpjp}, Endereço: ${this.state.epagador}
 
-Objetivos?
-R: ${this.state.objeto}
-
-Qual melhor horário ou período para receber o retorno do time do COMERCIAL?
-R: ${this.state.horario}
-
-Contato Principal: ${this.state.contato1}
-Contato 2: ${this.state.contato2}
-Meio de contato: ${this.state.mcontato}`;
+CPNJ DESTINO: ${this.state.cnpjd} - ${this.state.ndestino}, Endereço: ${this.state.dendereco}
+`;
     }
    
     handleChange9() {
-        this.setState({ horario: '' });
-        this.setState({ contato1: '' });
-        this.setState({ contato2: '' });
-        this.setState({ mcontato: '' });
-        this.setState({ fast: '' });
         this.setState({ ncliente: '' });
         this.setState({ ccliente: '' });
         this.setState({ volume: '' });
         this.setState({ objeto: '' });
+        this.setState({ vnota: '' });
+        this.setState({ nnota: '' });
+        this.setState({ epagador: '' });
+        this.setState({ npagador: '' });
+        this.setState({ cnpjp: '' });
+        this.setState({ ndestino: '' });
+        this.setState({ cnpjd: '' });
+        this.setState({ dendereco: '' });
+        this.setState({ remessa: '' })
+        this.setState({ cubagem: '' })
+        this.setState({ transportadora: '' })
+
     }
     render() {
         return (
@@ -70,9 +78,11 @@ Meio de contato: ${this.state.mcontato}`;
             }}>
                 <div style={{ textAlign: 'center' }}><label><b>NOTAS</b></label></div>
                 <br />              
-                <select name="nomeOpercao">
-                    <option value="remessaSimples">Remessa simples</option>
-                    <option value="remessaemLocacao">Remessa em locação</option>               
+                <select style={{ width: 175 }} onChange={(e) => this.setState({ remessa: e.target.value })}>
+                   <option value="">--DEFINA A REMESSA--
+                   </option>
+                    <option value="Remessa Simples">Remessa simples</option>
+                    <option value="Remessa em locação">Remessa em locação</option>               
                 </select>
                 <br />
                 <label>
@@ -93,9 +103,16 @@ Meio de contato: ${this.state.mcontato}`;
                     <b>
                         Quantidade de volume:
                     </b>
-                    <input type="text" style={{ width: 400 }} name="volume" value={this.state.volume} onChange={(e) => this.setState({ volume: e.target.value })} />
+                    <input type="number" style={{ width: 50 }} name="volume" value={this.state.volume} onChange={(e) => this.setState({ volume: e.target.value })} />
                 </label>
-                <br /> 
+                <br />                         
+                <label>
+                    <b>
+                        Cubagem:
+                    </b>                
+                    <input type="text" style={{ width: 200 }} name="cubagem" value={this.state.cubagem} onChange={(e) => this.setState({ cubagem: e.target.value })} />
+                </label>                       
+                <br />
                 <label> 
                 <b>
                         Objetos:
@@ -103,81 +120,71 @@ Meio de contato: ${this.state.mcontato}`;
                 <br />                                   
                     <textarea type="text" style={{ width: 100, height:50 }} name="objeto" value={this.state.objeto} onChange={(e) => this.setState({ objeto: e.target.value })} />      
                 </label> 
+                <br />  
+                <label> 
+                <b>
+                        Transportadora:
+                </b> 
+                <br />                                   
+                    <textarea type="text" style={{ width: 100, height:50 }} name="transportadora" value={this.state.transportadora} onChange={(e) => this.setState({ transportadora: e.target.value })} />      
+                </label> 
                 <br />   
                 <label> 
                 <b>
                         Valor da nota:
-                </b> 
-                <br />                                   
-                    <input type="text" style={{ width: 100, height:50 }} name="objeto" value={this.state.objeto} onChange={(e) => this.setState({ objeto: e.target.value })} />      
+                </b>                                            
+                    <input type="number" style={{ width: 100 }} name="vnota" value={this.state.vnota} onChange={(e) => this.setState({ vnota: e.target.value })} />      
                 </label> 
+                <br />    
                 <label> 
                 <b>
-                        Nota:
-                </b> 
-                <br />                                   
-                    <input type="text" style={{ width: 100, height:50 }} name="objeto" value={this.state.objeto} onChange={(e) => this.setState({ objeto: e.target.value })} />      
-                </label>   
+                        Número da nota:
+                </b>                                  
+                    <input type="text" style={{ width: 100 }} name="nnota" value={this.state.nnota} onChange={(e) => this.setState({ nnota: e.target.value })} />      
+                </label>  
+                <br />               
                 <label>
-                    <b>
-                        Cliente possui roteador Fast?
-                    </b>
+                <b>
+                        Nome do pagador:
+                </b>                                  
+                    <input type="text" style={{ width: 100 }} name="npagador" value={this.state.npagador} onChange={(e) => this.setState({ npagador: e.target.value })} />      
                 </label>
-                <br />
-                <div style={{ display: 'inline-block', marginRight: '10px' }}>
-                    <input type='radio' id='fast' name='fast' value='Sim'
-                        checked={this.state.fast === 'Sim'} onChange={(e) => this.setState({ fast: e.target.value })} /> Sim</div>
-                <div style={{ display: 'inline-block', marginRight: '10px' }}>
-                    <input type='radio' id='fast' name='fast' value='Não'
-                        checked={this.state.fast === 'Não'} onChange={(e) => this.setState({ fast: e.target.value })} /> Não</div>
-                <br />
+                <br /> 
                 <label>
-                    <b>
-                        Qual melhor horário ou período para receber o retorno do time do COMERCIAL?
-                    </b>
-                </label>
-                <br />
-                <div style={{ display: 'inline-block', marginRight: '10px' }}>
-                    <input type='radio' id='horario' name='horario' value='Manha'
-                        checked={this.state.horario === 'Manha'} onChange={(e) => this.setState({ horario: e.target.value })} />Manhã</div>
-                <div style={{ display: 'inline-block', marginRight: '10px' }}>
-                    <input type='radio' id='horario' name='horario' value='Tarde'
-                        checked={this.state.horario === 'Tarde'} onChange={(e) => this.setState({ horario: e.target.value })} />Tarde</div>
-                <div style={{ display: 'inline-block' }}>
-                    <input type='radio' id='horario' name='horario' value='Ambos'
-                        checked={this.state.horario === 'Ambos'} onChange={(e) => this.setState({ horario: e.target.value })} />Ambos</div>
-                <br />
+                <b>
+                        CNPJ do pagador:
+                </b>                                  
+                    <input type="text" style={{ width: 100 }} name="cnpjp" value={this.state.cnpjp} onChange={(e) => this.setState({ cnpjp: e.target.value })} />      
+                </label>               
+                <br /> 
                 <label>
-                    <b>
-                        Contato Principal:
-                    </b>
-                    <br />
-                    <input type="text" style={{ width: 400 }} name="contato1" value={this.state.contato1} onChange={(e) => this.setState({ contato1: e.target.value })} />
-                </label>
-                <br />
+                <b>
+                        Endereço do pagador:
+                </b>                                  
+                    <input type="text" style={{ width: 100 }} name="epagador" value={this.state.epagador} onChange={(e) => this.setState({ epagador: e.target.value })} />      
+                </label>  
+                <br />  
+                <br />               
                 <label>
-                    <b>
-                        Contato 2:
-                    </b>
-                    <br />
-                    <input type="text" style={{ width: 400 }} name="contato2" value={this.state.contato2} onChange={(e) => this.setState({ contato2: e.target.value })} />
+                <b>
+                        Nome do destino:
+                </b>                                  
+                    <input type="text" style={{ width: 100 }} name="ndestino" value={this.state.ndestino} onChange={(e) => this.setState({ ndestino: e.target.value })} />      
                 </label>
-                <br />
+                <br /> 
                 <label>
-                    <b>
-                        Meio de contato:
-                    </b>
-                </label>
-                <br />
-                <div style={{ display: 'inline-block', marginRight: '10px' }}>
-                    <input type='radio' id='mcontato' name='mcontato' value='WHATSAPP'
-                        checked={this.state.mcontato === 'WHATSAPP'} onChange={(e) => this.setState({ mcontato: e.target.value })} /> WHATSAPP</div>
-                <div style={{ display: 'inline-block', marginRight: '10px' }}>
-                    <input type='radio' id='mcontato' name='mcontato' value='LIGAÇÃO'
-                        checked={this.state.mcontato === 'LIGAÇÃO'} onChange={(e) => this.setState({ mcontato: e.target.value })} /> LIGAÇÃO</div>
-                <div style={{ display: 'inline-block' }}>
-                    <input type='radio' id='mcontato' name='mcontato' value='AMBOS'
-                        checked={this.state.mcontato === 'AMBOS'} onChange={(e) => this.setState({ mcontato: e.target.value })} /> AMBOS</div>
+                <b>
+                        CNPJ do destino:
+                </b>                                  
+                    <input type="text" style={{ width: 100 }} name="cnpjd" value={this.state.cnpjd} onChange={(e) => this.setState({ cnpjd: e.target.value })} />      
+                </label>               
+                <br /> 
+                <label>
+                <b>
+                        Endereço do destino:
+                </b>                                  
+                    <input type="text" style={{ width: 100 }} name="dendereco" value={this.state.dendereco} onChange={(e) => this.setState({ dendereco: e.target.value })} />      
+                </label>                                 
                 <br />
                 <br />
                 <div style={{ textAlign: 'center' }}>
