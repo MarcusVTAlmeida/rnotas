@@ -1,7 +1,7 @@
 {
   "name": "rnotas",
   "version": "0.1.0", 
-  "homepage": "https://marcusvtalmeida.github.io/rnotas/",
+  "homepage": "https://lpasqualone.github.io/travel-journal",
   "private": true,
   "scripts": {
     "dev": "next dev",
